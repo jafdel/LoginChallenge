@@ -34,9 +34,8 @@
 
     boolean isMatch(String username, String password, ArrayList<String> users, ArrayList<String> credentials) {
         for (int i=0; i<users.size(); i++) {
-            if (username.equals(users.get(i)) && password.equals(credentials.get(i))) {
+            if (username.equals(users.get(i)) && password.equals(credentials.get(i)))
                 return true;
-            }
         }
         return false;
     }
