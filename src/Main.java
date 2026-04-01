@@ -1,13 +1,10 @@
+//import com.loginchallenge.models.User;
+import com.loginchallenge.models.UserList;
+
 //public class Main {
     void main() {
-        ArrayList<String> users = new ArrayList<>();
-        ArrayList<String> credentials = new ArrayList<>();
-        users.add("jafdel");
-        credentials.add("password");
-        users.add("thefuzzbuzz");
-        credentials.add("Password");
-        users.add("bcocozza");
-        credentials.add("P455w0rd");
+        Path file = Path.of("users.txt");
+        UserList userList = new UserList(file);
 
         Scanner reader = new Scanner(System.in);
         byte attempts = 3;
@@ -17,7 +14,7 @@
             IO.print("Enter your password: ");
             String password = reader.nextLine();
             if (isValid(username, password)) {
-                if (isMatch(username, password, users, credentials)) {
+                if (userList.isMatch(username, password)) {
                     attempts = -1;
                     IO.println("Welcome to the club!");
                 } else {
@@ -32,15 +29,7 @@
         } while(attempts > 0);
     }
 
-    boolean isMatch(String username, String password, ArrayList<String> users, ArrayList<String> credentials) {
-        for (int i=0; i<users.size(); i++) {
-            if (username.equals(users.get(i)) && password.equals(credentials.get(i)))
-                return true;
-        }
-        return false;
-    }
-
     boolean isValid(String username, String password) {
-        return (!username.isEmpty() && !username.isBlank() && !password.isEmpty() && !password.isBlank());
+        return (!username.isBlank() && !password.isBlank());
     }
 //}
